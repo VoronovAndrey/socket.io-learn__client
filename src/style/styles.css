@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #524eb7;
+}
+
+.layout {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 550px;
+    height: 100vh;
+    max-height: 650px;
+    /* border: 1px solid #000; */
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+
+    border-radius: 15px;
+    background: #524eb7;
+    box-shadow: 20px 20px 60px #46429c,
+        -20px -20px 60px #5e5ad2;
+
+    overflow: hidden;
+}
+
+.messages-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.message-item__container {
+    display: flex;
+    flex-direction: row;
+    margin: 5px 0;
+}
+
+
+/* #1687d9 */
+/* #1543cc */
+.message-wrapper {
+    width: 60%;
+    padding: 6px 15px;
+    color: #fff;
+    border-radius: 10px;
+    background: #6461BF;
+    position: relative;
+    z-index: 1;
+}
+
+.message-wrapper__sent {
+    background: #6461BF;
+    border-bottom-right-radius: 0;
+}
+
+.message-wrapper__recived {
+    background: #4844A7;
+    border-bottom-left-radius: 0;
+}
+
+.message-wrapper__recived::after {
+    position: absolute;
+    content: '';
+    /* background: #4844A7; */
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 0px solid transparent;
+    border-bottom: 15px solid #4844A7;
+    bottom: 0px;
+    left: -6px;
+    z-index: 0;
+}
+
+.message-wrapper__sent::after {
+    position: absolute;
+    content: '';
+    /* background: #4844A7; */
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 0px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 15px solid #6461BF;
+    bottom: 0px;
+    right: -6px;
+    z-index: 0;
+}
+
+
+.input-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 7px;
+}
+
+.input {
+    flex: 1;
+    background: #A6A4DA;
+    border: none;
+    outline: none;
+    padding: 7px 15px;
+    border-radius: 15px;
+    color: #1d1c3c;
+}
+
+.input-wrapper__btn {
+    background: #A6A4DA;
+    border: none;
+    outline: none;
+    padding: 7px 15px;
+    border-radius: 15px;
+    color: #1d1c3c;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.input-wrapper__btn:hover {
+   opacity: 0.8;
+}
+
+.input-wrapper__btn img{
+    width: 17px;
+    height: 16px;
+    object-fit: contain;
+    opacity: 0.8;
+}
