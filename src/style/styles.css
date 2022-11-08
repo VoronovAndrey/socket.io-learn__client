@@ -39,6 +39,7 @@ body {
     flex: 1;
     flex-direction: column;
     padding: 10px;
+    overflow-y: auto;
 }
 
 .message-item__container {
@@ -58,6 +59,7 @@ body {
     background: #6461BF;
     position: relative;
     z-index: 1;
+    min-height: 30px;
 }
 
 .message-wrapper__sent {
