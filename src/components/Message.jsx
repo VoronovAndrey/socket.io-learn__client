@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Message = ({ title = 'none', isSent = true}) => {
+const Message = ({data, isSent = true}) => {
     return (
         <div className="message-item__container" 
             style={{
@@ -8,7 +8,8 @@ const Message = ({ title = 'none', isSent = true}) => {
             }}
         >
             <div className={`message-wrapper message-wrapper__${isSent ? 'sent' : 'recived'}`}>
-                <p>{title}</p>
+                <p className='message-item__username'>{isSent ? 'You' : data.user.username}</p>
+                <p className='message-item__content'>{data.message}</p>
             </div>
         </div>
     )

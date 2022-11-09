@@ -7,9 +7,7 @@ const InputContainer = ({ socket, user }) => {
 		if (inputRef.current.value !== '') {
 			let sendData = {
 				message: inputRef.current.value,
-				user: {
-					id: user
-				}
+				user
 			}
 			socket.emit("send_message", sendData )
 			inputRef.current.value = ''
