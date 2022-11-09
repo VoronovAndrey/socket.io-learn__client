@@ -10,6 +10,8 @@ const socket = io('http://192.168.1.33:3001')
 const NavigationContainer = () => {
 	const [user, setUser] = useState(null)
 	const [users, setUsers] = useState([])
+	const [chatList, setChatList] = useState([])
+
 
 	useEffect(() => {
 		socket.on("connect", () => {
@@ -55,9 +57,10 @@ const NavigationContainer = () => {
 						socket={socket}
 						user={{ user, setUser }}
 						users={users}
+						chatList={{ chatList, setChatList }}
 					/>
 				} />
-				<Route path='/chat' element={
+				<Route path='/chat_:room_id' element={
 					<Chat
 						socket={socket}
 						user={user}

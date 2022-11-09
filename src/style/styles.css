@@ -61,6 +61,11 @@ body {
     padding: 5px 0;
 }
 
+.message-item__time {
+    font-size: 10px;
+    text-align: right;
+}
+
 /* #1687d9 */
 /* #1543cc */
 .message-wrapper {
@@ -269,3 +274,63 @@ body {
 .create-chat__btn_disabled {
     cursor: default;
 }
+
+.chatlist__container {
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.chatlist-item__wrapper {
+    width: 100%;
+    background: #4844A7;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin-top: 10px;
+    display: block;
+    text-decoration: none;
+    color: #1d1c3c;
+}
+
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #35327a transparent;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #35327a;
+    border-radius: 10px;
+    border: 2px solid #524eb7;
+  }
+
+  .back-btn {
+    display: block;
+    width: fit-content;
+    background: none;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    padding: 15px;
+    border-radius: 15px;
+    color: #1d1c3c;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .back-btn:hover {
+    text-decoration: underline;
+  }
+

@@ -1,13 +1,15 @@
 import React from 'react'
 import SendIcon from './send.svg'
 
-const InputContainer = ({ socket, user }) => {
+const InputContainer = ({ socket, user, room_id }) => {
 	const inputRef = React.useRef('')
 	const onSendHandler = () => {
 		if (inputRef.current.value !== '') {
 			let sendData = {
 				message: inputRef.current.value,
-				user
+				user,
+				room_id,
+				time: new Date().toISOString()
 			}
 			socket.emit("send_message", sendData )
 			inputRef.current.value = ''

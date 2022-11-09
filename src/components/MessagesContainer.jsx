@@ -1,7 +1,12 @@
-import React from 'react'
+import React, {useEffect, useRef} from 'react'
 import Message from './Message'
 
 const MessagesContainer = ({messages, user}) => {
+  const lastMessageRef = useRef(null)
+  useEffect(() => {
+    // scroll to bottom every time messages change
+    lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
   return (
     <div className='messages-container'>
     {messages && (
@@ -14,6 +19,9 @@ const MessagesContainer = ({messages, user}) => {
             />
         })
     )}
+    <div
+      ref={lastMessageRef}
+    />
     </div>
   )
 }

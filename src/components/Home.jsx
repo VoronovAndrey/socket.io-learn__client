@@ -1,11 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react'
+import ChatListItem from './ChatListItem'
 import UserListItem from './UserListItem'
 
-const Home = ({ socket, user: { user, setUser }, users }) => {
+const Home = ({ 
+	socket, 
+	user: { user, setUser }, 
+	users,
+	chatList: {chatList, setChatList}
+}) => {
 	const inputRef = useRef('')
 	const [listShown, setListShown] = useState(false)
 	const [members, setMembers] = useState([])
-	const [chatList, setChatList] = useState([])
 
 	const addMembersHandler = (id) => {
 		let tmp = members.filter(i => id === i)
@@ -22,10 +27,10 @@ const Home = ({ socket, user: { user, setUser }, users }) => {
 		if (name === null) return
 		name = name.trim() === '' ? `${user.username} room` : name
 		let room_id = `${user.username}-${Date.now()}`
-		socket.emit('create_room', { 
-			members: [...members, user._id], 
-			name, 
-			room_id 
+		socket.emit('create_room', {
+			members: [...members, user._id],
+			name,
+			room_id
 		})
 
 		setMembers([])
@@ -46,9 +51,11 @@ const Home = ({ socket, user: { user, setUser }, users }) => {
 
 	useEffect(() => {
 		socket.on('new_chat_response', (data) => {
-			console.log('new_chat_response', data);
+			// console.log('new_chat_response', data);
 			setChatList(data)
 		})
+
+
 		return () => {
 			socket.off('new_chat_response')
 		};
@@ -56,7 +63,7 @@ const Home = ({ socket, user: { user, setUser }, users }) => {
 
 	if (!user) return (
 		<div className='home-auth'>
-			<h3 className='home-auth__title'>Your nickname is:</h3>
+			<h3 className='home-auth__title' style={{marginBottom: '10px'}}>Your nickname is:</h3>
 			<input
 				type="text"
 				ref={inputRef}
@@ -81,32 +88,36 @@ const Home = ({ socket, user: { user, setUser }, users }) => {
 			</div>
 
 			{(chatList && !listShown) && (
-				<>
+				<div className='chatlist__container'>
+					<h4>Chats: </h4>
 					{chatList.map(i => {
-						return <p key={i.room_id}>{i.name}</p>
+						return <ChatListItem
+							key={i.room_id}
+							data={i}
+						/>
 					})}
-				</>
+				</div>
 			)}
 
 			{(users && listShown) && (
 				<>
-				<div className='user-list__container'>
-					{ users.map(i => {
-						let selected = members.findIndex(el => el === i._id)
-					if (i._id !== user._id) return <UserListItem
-						info={i}
-						key={i._id}
-						click={() => addMembersHandler(i._id)}
-						selected={selected >= 0}
-					/>
-					return null
-					})}
-				</div>
-				<button
-					className={`user-list__btn create-chat__btn ${members.length === 0 ? 'create-chat__btn_disabled' : ''}`}
-					disabled={members.length === 0}
-					onClick={createChatHandler}
-				>Create chat with selected ({members.length})</button>
+					<div className='user-list__container'>
+						{users.map(i => {
+							let selected = members.findIndex(el => el === i._id)
+							if (i._id !== user._id) return <UserListItem
+								info={i}
+								key={i._id}
+								click={() => addMembersHandler(i._id)}
+								selected={selected >= 0}
+							/>
+							return null
+						})}
+					</div>
+					<button
+						className={`user-list__btn create-chat__btn ${members.length === 0 ? 'create-chat__btn_disabled' : ''}`}
+						disabled={members.length === 0}
+						onClick={createChatHandler}
+					>Create chat with selected ({members.length})</button>
 				</>
 			)}
 		</>
